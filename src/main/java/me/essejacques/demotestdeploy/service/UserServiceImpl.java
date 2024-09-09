@@ -12,9 +12,9 @@ import java.util.random.RandomGenerator;
 public class UserServiceImpl implements UserService {
 
     List<User> users = new ArrayList<>(
-            List.of(new User(1L, "Rose", "rose@test.com", "1234"),
-                    new User(2L, "Elise", "elise@test.com", "1234"),
-                    new User(3L, "Fifi", "fifi@test.com", "1234"))
+            List.of(new User(1L, "Jordan", "jordan@test.com", "123456"),
+                    new User(2L, "Jane", "jane@doe.com", "123456"),
+                    new User(3L, "Bob", "bob@doe.com", "123456"))
     );
 
     /**
@@ -27,6 +27,20 @@ public class UserServiceImpl implements UserService {
         //user.setName("Jacques " + user.getName());
         users.add(user);
         return user;
+    }
+
+    @Override
+    public User updateUser(User user) {
+        User toModified = fetchUserById(user.getId());
+        int index = users.indexOf(toModified);
+        users.set(index,user);
+        return user;
+    }
+
+    @Override
+    public void deleteUser(Long id) {
+        User user = fetchUserById(id);
+        this.users.remove(user);
     }
 
     /**
